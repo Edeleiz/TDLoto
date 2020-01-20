@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TowerDefense.Nodes;
 using UnityEditor;
+using UnityEngine;
 
 namespace TowerDefense.Level.Editor
 {
@@ -19,6 +21,22 @@ namespace TowerDefense.Level.Editor
 
 		public override void OnInspectorGUI()
 		{
+
+			if (GUILayout.Button("Set nodes to default"))
+			{
+				Node startingNode = null;
+				foreach (var spawn in m_Wave.spawnInstructions)
+				{
+					if (startingNode == null)
+					{
+						startingNode = spawn.startingNode;
+					}
+					else
+					{
+						spawn.startingNode = startingNode;
+					}
+				}
+			}
 			base.OnInspectorGUI();
 
 			// Draw a summary of all spawn instructions
